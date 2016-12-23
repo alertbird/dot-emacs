@@ -8,6 +8,22 @@
 
 * About
 
+  This Emacs configuration file is written in [[http://orgmode.org/][Org mode]]. I learned and
+  copied a lot from the [[https://github.com/larstvei/dot-emacs/blob/master/init.org][Emacs configuration file]] by Lars Tveito.
+  
+  All changes to the configuration should be done in this
+  =settings.org= file, *not* in =settings.el=. The =settings.el= in
+  this repo is not tracked by git and it is regenerated when Emacs is
+  started.
+
+  Emacs can't load =.org= files directly, but =org-mode= provides
+  functions to extract the code blocks and write them to a file. I
+  currently handle this in the way suggested by [[http://emacs.stackexchange.com/questions/3143/can-i-use-org-mode-to-structure-my-emacs-or-other-el-configuration-file][this StackOverflow
+  post]]. 
+
+  I try to keep this configuration simple and short by only adding
+  stuff that I understand and I use.
+
   This is an Emacs configuration file written in [[http://orgmode.org][Org mode]]. It is an attempt
   to keep my =~/.emacs.d= tidy, but still be able to keep it all in one
   file. I aim to briefly explain all my configurations as I go along!
@@ -41,7 +57,7 @@
   On first run it should install a bunch of packages (this might take a
   while), and you might have to restart your Emacs the first time. If you
   experience bugs, please let me know!
-
+  
 * Configurations
 ** Meta
 
@@ -166,6 +182,8 @@
              define-word          ; display the definition of word at point
              diminish             ; Diminished modes from modeline
              drag-stuff           ; Drag stuff around in Emacs
+             evil                 ; an extensible vi layer for Emacs
+             evil-magit           ; black magic or evil keys for magit
              expand-region        ; Increase selected region by semantic units
              focus                ; Dim color of text in surrounding sections
              idle-require         ; load elisp libraries while Emacs is idle
@@ -177,6 +195,7 @@
              helm-company         ; Helm interface for company-mode
              helm-projectile      ; Helm integration for Projectile
              helm-swoop           ; Efficiently hopping squeezed lines
+             iedit                ; Edit Multiple regions simultaneously in a buffer or a region
              jedi                 ; Python auto-completion for Emacs
              js2-mode             ; Improved JavaScript editing mode
              magit                ; control Git from Emacs
@@ -187,11 +206,13 @@
              multiple-cursors     ; Multiple cursors for Emacs
              olivetti             ; Minor mode for a nice writing environment
              org                  ; Outline-based notes management and organizer
+             org-evil             ; supplemental evil-mode keybindings to emacs org-mode
              paredit              ; minor mode for editing parentheses
              pdf-tools            ; Emacs support library for PDF files
              projectile           ; Manage and navigate projects in Emacs easily
              slime                ; Superior Lisp Interaction Mode for Emacs
-             try))                ; Try out Emacs packages
+             try                  ; Try out Emacs packages
+             which-key))          ; Emacs package that displays available keybindings in popup 
           ;; Remove all packages already installed
           (packages (remove-if 'package-installed-p packages)))
      (when packages
@@ -211,7 +232,7 @@
    along with external processes a lot simpler. I also prefer using the
    =Command=-key as the =Meta=-key.
 
-   #+BEGIN_SRC emacs-lisp
+   #BEGIN_SRC emacs-lisp
    (when (memq window-system '(mac ns))
      (setq ns-pop-up-frames nil
            mac-option-modifier nil
@@ -347,7 +368,7 @@
    #+BEGIN_SRC emacs-lisp
    (dolist (mode
             '(tool-bar-mode                ; No toolbars, more room for text
-              scroll-bar-mode              ; No scroll bars either
+              ;scroll-bar-mode             ; No scroll bars either
               blink-cursor-mode))          ; The blinking cursor gets old
      (funcall mode 0))
    #+END_SRC
@@ -559,7 +580,7 @@
    (setq calendar-week-start-day 1
          calendar-latitude 60.0
          calendar-longitude 10.7
-         calendar-location-name "Oslo, Norway")
+         calendar-location-name "London, UK")
    #+END_SRC
 
 ** mu4e and offlineimap
@@ -696,14 +717,14 @@
    I use =org-agenda= along with =org-capture= for appointments and such.
 
    #+BEGIN_SRC emacs-lisp
-   (setq org-agenda-files '("~/Dropbox/agenda.org")  ; A list of agenda files
+   (setq org-agenda-files '("~/notes/agenda.org")  ; A list of agenda files
          org-agenda-default-appointment-duration 120 ; 2 hours appointments
          org-capture-templates                       ; Template for adding tasks
-         '(("t" "Oppgave" entry (file+headline "~/Dropbox/agenda.org" "Oppgaver")
+         '(("t" "Oppgave" entry (file+headline "~/notes/agenda.org" "Oppgaver")
             "** TODO %?" :prepend t)
-           ("m" "Master" entry (file+olp "~/Dropbox/agenda.org" "Oppgaver" "Master")
+           ("m" "Master" entry (file+olp "~/notes/agenda.org" "Oppgaver" "Master")
             "*** TODO %?" :prepend t)
-           ("a" "Avtale" entry (file+headline "~/Dropbox/agenda.org" "Avtaler")
+           ("a" "Avtale" entry (file+headline "~/notes/agenda.org" "Avtaler")
             "** %?\n   SCHEDULED: %T" :prepend t)))
    #+END_SRC
 
@@ -1267,7 +1288,7 @@
 ** Bindings for [[http://magit.github.io][Magit]]
 
   #+BEGIN_SRC emacs-lisp
-  (define-key custom-bindings-map (kbd "C-c m") 'magit-status)
+  (define-key custom-bindings-map (kbd "C-x g") 'magit-status)
   #+END_SRC
 
 ** Bindings for [[http://company-mode.github.io/][company-mode]]
@@ -1353,6 +1374,7 @@
     "A mode that activates custom-bindings."
     t nil custom-bindings-map)
   #+END_SRC
+
 * License
 
   My Emacs configurations written in Org mode.
