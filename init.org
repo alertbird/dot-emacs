@@ -400,19 +400,20 @@
 
 ** Visual
 
-   Change the color-theme to =leuven=.
+   Change the color-theme to =material=, which is a dark theme from [[https://github.com/cpaulik/emacs-material-theme][emacs-material-theme]].
 
    #+BEGIN_SRC emacs-lisp
-   (load-theme 'leuven t)
+   (load-theme 'material t)
    #+END_SRC
 
-   =leuven= is my preferred light theme, but =monokai= makes a very nice
-   dark theme. I want to be able to cycle between these.
+   =material= is similar to =monokai=, which is a very nice dark theme. Also,
+   there are other themes, for example =leuven= is a light theme within the
+   defaul emacs colour-themes. I want to be able to cycle between these.
 
    #+BEGIN_SRC emacs-lisp
    (defun cycle-themes ()
      "Returns a function that lets you cycle your themes."
-     (lexical-let ((themes '#1=(leuven material . #1#)))
+     (lexical-let ((themes '#1=(material leuven . #1#)))
        (lambda ()
          (interactive)
          ;; Rotates the thme cycle and changes the current theme.
