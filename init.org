@@ -992,6 +992,19 @@
    ;; (setq evil-magit-use-y-for-yank nil)
    #+END_SRC
 
+** which-key
+   
+   =which-key= is used to remind me key bindings. =which-key= has a [[https://github.com/justbur/emacs-which-key][home-page]]
+   at github.
+
+   #+BEGIN_SRC emacs-lisp
+   (require 'which-key)
+   (which-key-mode)
+   ;; Set the time delay (in seconds) for the which-key popup to appear. A value of
+   ;; zero might cause issues so a non-zero value is recommended.
+   (setq which-key-idle-delay 1.0)
+   #+END_SRC
+ 
 ** Shell
 
    I use =shell= whenever i want to use access the command line in Emacs. I
