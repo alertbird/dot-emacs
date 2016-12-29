@@ -16,7 +16,7 @@
 
 **** special folder and file
 
-**** add instructions for uninstall packages
+**** DONE add instructions for uninstall packages
 
 ** adopt the existing folked code and test again
 *** comment some unused parts
@@ -245,6 +245,18 @@
        (ignore-errors (package-refresh-contents)
                       (mapcar 'package-install packages))))
    #+END_SRC
+
+   If a elpa package needs to be uninstalled manually, we can follow the
+   instructions on this [[http://stackoverflow.com/questions/16469600/how-to-remove-an-installed-package-in-emacs-ver-24][StackOverflow post]].
+   
+   1) run command =M-x package-list-packages= and find the package to be deleted;
+   
+   2) mark for deletion with key '=d=' or command =M-x
+package-menu-mark-delete=;
+ 
+   3) execute the deletion with key '=x=' or command =M-x package-menu-execute=.
+ 
+    
 
 ** Mac OS X
 
