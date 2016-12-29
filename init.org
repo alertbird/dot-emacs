@@ -13,11 +13,8 @@
 *** add full screen
 ** add more documentations
 **** DONE how to fork and track
-
-**** special folder and file
-
 **** DONE add instructions for uninstall packages
-
+**** DONE special folder and file
 ** adopt the existing folked code and test again
 *** comment some unused parts
 *** fix warnings
@@ -63,6 +60,16 @@
     #+END_SRC
     
     The goal of the rebase is to have a cleaner history.
+
+** Special files and directories
+
+    There are some special files and directoies in the inital configurations.
+
+    =private.el=: keeps some private settings.
+
+    =site-lisp=: manually installed extensions.
+ 
+    =agenda.org=: agenda file used by Org mode.
 
 * About
 
