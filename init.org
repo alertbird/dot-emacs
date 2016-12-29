@@ -16,7 +16,7 @@
 **** DONE add instructions for uninstall packages
 **** DONE special folder and file
 ** adopt the existing folked code and test again
-*** fix warnings: commented out mu4e
+*** fix warnings: commented out mu4e; commented out some code for older versions.
 *** comment some unused parts
 ** evil mode enhancements
 *** add more evil stuff: evil leader
@@ -473,9 +473,10 @@ package-menu-mark-delete=;
               show-paren-mode))            ; Highlight matching parentheses
      (funcall mode 1))
 
-   (when (version< emacs-version "24.4")
-     (eval-after-load 'auto-compile
-       '((auto-compile-on-save-mode 1))))  ; compile .el files on save
+  ; this can be deleted as I use ver. 25+
+  ;(when (version< emacs-version "24.4")
+  ;  (eval-after-load 'auto-compile
+  ;    '((auto-compile-on-save-mode 1))))  ; compile .el files on save
 
    #+END_SRC
 
