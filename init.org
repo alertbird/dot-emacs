@@ -16,8 +16,9 @@
 **** DONE add instructions for uninstall packages
 **** DONE special folder and file
 ** adopt the existing folked code and test again
-*** fix warnings: commented out mu4e; commented out some code for older
-versions; changed cl to be cl-lib;
+*** DONE fix warnings
+    commented out mu4e; commented out some code for older
+versions; changed cl to be cl-lib; commented out the lisp stuff.
 *** comment some unused parts
 ** evil mode enhancements
 *** add more evil stuff: evil leader
@@ -28,7 +29,6 @@ versions; changed cl to be cl-lib;
 
 *** git-gutter-fringe does not work in terminal
     
-
 * Notes
   
    I forked Lars Tveito's [[https://github.com/larstvei/dot-emacs][dot-emacs]] repo to start my Emacs configurations. I
@@ -675,15 +675,15 @@ package-menu-mark-delete=;
 
 ** mu4e and offlineimap
 
-      # I might not be at a computer using my very specific mail-setup, but if my
-      # mail-folder exists, then it's probably safe to load.
-      #
-      # #+BEGIN_SRC emacs-lisp
-      # (defvar load-mail-setup (file-exists-p "~/.ifimail"))
-      # #+END_SRC
-      #
-      # I use [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] (which is a part of [[http://www.djcbsoftware.nl/code/mu/][mu]]) along with [[http://docs.offlineimap.org/en/latest/][offlineimap]] on one of my
-      # computers.
+  # I might not be at a computer using my very specific mail-setup, but if my
+  # mail-folder exists, then it's probably safe to load.
+  #
+  # #+BEGIN_SRC emacs-lisp
+  # (defvar load-mail-setup (file-exists-p "~/.ifimail"))
+  # #+END_SRC
+  #
+  # I use [[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] (which is a part of [[http://www.djcbsoftware.nl/code/mu/][mu]]) along with [[http://docs.offlineimap.org/en/latest/][offlineimap]] on one of my
+  # computers.
 
 *** mu4e
 
@@ -1165,51 +1165,47 @@ package-menu-mark-delete=;
 
 *** Common lisp
 
-    I use [[http://www.common-lisp.net/project/slime/][Slime]] along with =lisp-mode= to edit Common Lisp code. Slime
-    provides code evaluation and other great features, a must have for a
-    Common Lisp developer. [[http://www.quicklisp.org/beta/][Quicklisp]] is a library manager for Common Lisp,
-    and you can install Slime following the instructions from the site along
-    with this snippet.
+    # I use [[http://www.common-lisp.net/project/slime/][Slime]] along with =lisp-mode= to edit Common Lisp code. Slime
+    # provides code evaluation and other great features, a must have for a
+    # Common Lisp developer. [[http://www.quicklisp.org/beta/][Quicklisp]] is a library manager for Common Lisp,
+    # and you can install Slime following the instructions from the site along
+    # with this snippet.
 
-    #+BEGIN_SRC emacs-lisp
-    (defun activate-slime-helper ()
-      (when (file-exists-p "~/.quicklisp/slime-helper.el")
-        (load (expand-file-name "~/.quicklisp/slime-helper.el"))
-        (define-key slime-repl-mode-map (kbd "C-l")
-          'slime-repl-clear-buffer))
-      (remove-hook 'lisp-mode-hook #'activate-slime-helper))
+    # #+BEGIN_SRC emacs-lisp
+    # (defun activate-slime-helper ()
+    #   (when (file-exists-p "~/.quicklisp/slime-helper.el")
+    #     (load (expand-file-name "~/.quicklisp/slime-helper.el"))
+    #     (define-key slime-repl-mode-map (kbd "C-l")
+    #       'slime-repl-clear-buffer))
+    #   (remove-hook 'lisp-mode-hook #'activate-slime-helper))
 
-    (add-hook 'lisp-mode-hook #'activate-slime-helper)
-    #+END_SRC
+    # (add-hook 'lisp-mode-hook #'activate-slime-helper)
+    # #+END_SRC
 
-    We can specify what Common Lisp program Slime should use (I use SBCL).
+    # We can specify what Common Lisp program Slime should use (I use SBCL).
 
-    #+BEGIN_SRC emacs-lisp
-    (setq inferior-lisp-program "sbcl")
-    #+END_SRC
+    # #+BEGIN_SRC emacs-lisp
+    # (setq inferior-lisp-program "sbcl")
+    # #+END_SRC
 
-    More sensible =loop= indentation, borrowed from [[https://github.com/simenheg][simenheg]].
+    # More sensible =loop= indentation, borrowed from [[https://github.com/simenheg][simenheg]].
 
-    #+BEGIN_SRC emacs-lisp
-    (setq lisp-loop-forms-indentation   6
-          lisp-simple-loop-indentation  2
-          lisp-loop-keyword-indentation 6)
-    #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp
-
-    #+END_SRC
+    # #+BEGIN_SRC emacs-lisp
+    # (setq lisp-loop-forms-indentation   6
+    #       lisp-simple-loop-indentation  2
+    #       lisp-loop-keyword-indentation 6)
+    # #+END_SRC
 
 *** Scheme
 
-    [[http://www.nongnu.org/geiser/][Geiser]] provides features similar to Slime for Scheme editing. Everything
-    works pretty much out of the box, we only need to add auto completion,
-    and specify which scheme-interpreter we prefer.
+    # [[http://www.nongnu.org/geiser/][Geiser]] provides features similar to Slime for Scheme editing. Everything
+    # works pretty much out of the box, we only need to add auto completion,
+    # and specify which scheme-interpreter we prefer.
 
-    #+BEGIN_SRC emacs-lisp
-    (eval-after-load "geiser"
-      '(setq geiser-active-implementations '(guile)))
-    #+END_SRC
+    # #+BEGIN_SRC emacs-lisp
+    # (eval-after-load "geiser"
+    #   '(setq geiser-active-implementations '(guile)))
+    # #+END_SRC
 
 ** Java and C
 
