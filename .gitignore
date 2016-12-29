@@ -1,3 +1,12 @@
-
+# Untracked files
 private.el
+init.elc
+recentf
+helm-adaptive-history
+projectile-bookmarks.eld
+
+# Untracked directories
+elpa/*
+autosaves/*
+auto-save-list/*
 
