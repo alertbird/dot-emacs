@@ -17,7 +17,7 @@
 **** DONE special folder and file
 ** adopt the existing folked code and test again
 *** fix warnings: commented out mu4e; commented out some code for older
-versions; changed cl to be cl-lib.
+versions; changed cl to be cl-lib;
 *** comment some unused parts
 ** evil mode enhancements
 *** add more evil stuff: evil leader
@@ -72,6 +72,10 @@ versions; changed cl to be cl-lib.
  
     =agenda.org=: agenda file used by Org mode.
 
+** Others
+   
+    - Comment out a region: select a region and use command =M-x comment-region= 
+     
 * About
 
   This Emacs configuration file is written in [[http://orgmode.org/][Org mode]]. I learned and
@@ -939,25 +943,25 @@ package-menu-mark-delete=;
        (untabify beg (if (< end (point-max)) end (point-max)))))
    #+END_SRC
 
-   Org mode does currently not support synctex (which enables you to jump from
-   a point in your TeX-file to the corresponding point in the pdf), and it
-   [[http://comments.gmane.org/gmane.emacs.orgmode/69454][seems like a tricky problem]].
+   # Org mode does currently not support synctex (which enables you to jump from
+   # a point in your TeX-file to the corresponding point in the pdf), and it
+   # [[http://comments.gmane.org/gmane.emacs.orgmode/69454][seems like a tricky problem]].
 
-   Calling this function from an org-buffer jumps to the corresponding section
-   in the exported pdf (given that the pdf-file exists), using pdf-tools.
+   # Calling this function from an org-buffer jumps to the corresponding section
+   # in the exported pdf (given that the pdf-file exists), using pdf-tools.
 
-   #+BEGIN_SRC emacs-lisp
-   (defun org-sync-pdf ()
-     (interactive)
-     (let ((headline (nth 4 (org-heading-components)))
-           (pdf (concat (file-name-base (buffer-name)) ".pdf")))
-       (when (file-exists-p pdf)
-         (find-file-other-window pdf)
-         (pdf-links-action-perform
-          (cl-find headline (pdf-info-outline pdf)
-                   :key (lambda (alist) (cdr (assoc 'title alist)))
-                   :test 'string-equal)))))
-   #+END_SRC
+   # #+BEGIN_SRC emacs-lisp
+   # (defun org-sync-pdf ()
+   #   (interactive)
+   #   (let ((headline (nth 4 (org-heading-components)))
+   #         (pdf (concat (file-name-base (buffer-name)) ".pdf")))
+   #     (when (file-exists-p pdf)
+   #       (find-file-other-window pdf)
+   #       (pdf-links-action-perform
+   #        (cl-find headline (pdf-info-outline pdf)
+   #                 :key (lambda (alist) (cdr (assoc 'title alist)))
+   #                 :test 'string-equal)))))
+   # #+END_SRC
 
 ** Advice
 
