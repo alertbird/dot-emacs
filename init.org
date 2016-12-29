@@ -6,6 +6,39 @@
 #+LATEX_HEADER: \usepackage[utf8]{inputenc}
 #+PROPERTY: header-args :tangle yes
 
+* Backlog
+
+** more customization
+
+*** fix the problem with mac customization
+
+*** add full screen
+
+** add more documentations
+
+**** how to folk and track
+
+**** special folder and file
+
+**** add instructions for uninstall packages
+
+** adopt the existing folked code and test again
+
+*** comment some unused parts
+
+*** fix warnings
+
+
+** evil mode enhancements
+*** add more evil stuff: evil leader
+
+** tmux and server
+
+** use Emacs in terminal
+
+*** git-gutter-fringe does not work in terminal
+    
+
 * About
 
   This Emacs configuration file is written in [[http://orgmode.org/][Org mode]]. I learned and
@@ -145,7 +178,7 @@
    #+END_SRC
 
 ** Packages
-
+   
    Managing extensions for Emacs is simplified using =package= which is
    built in to Emacs 24 and newer. To load downloaded packages we need to
    initialize =package=. =cl= is a library that contains many functions from
@@ -184,6 +217,7 @@
              drag-stuff           ; Drag stuff around in Emacs
              evil                 ; an extensible vi layer for Emacs
              evil-magit           ; black magic or evil keys for magit
+             exec-path-from-shell ; Use the $PATH setup of the user's shell
              expand-region        ; Increase selected region by semantic units
              focus                ; Dim color of text in surrounding sections
              idle-require         ; load elisp libraries while Emacs is idle
@@ -217,10 +251,7 @@
           (packages (remove-if 'package-installed-p packages)))
      (when packages
        (ignore-errors (package-refresh-contents)
-                      (mapcar 'package-install packages)
-                      ;; This package is only relevant for Mac OS X.
-                      (when (memq window-system '(mac ns))
-                        (package-install 'exec-path-from-shell)))))
+                      (mapcar 'package-install packages))))
    #+END_SRC
 
 ** Mac OS X
@@ -231,13 +262,18 @@
    to include environment-variables from the shell. It makes using Emacs
    along with external processes a lot simpler. I also prefer using the
    =Command=-key as the =Meta=-key.
+   
+   I also learned from this [[https://github.com/joelkuiper/dotfiles/blob/master/emacs][emacs configuration]], which uses evil too.
 
-   #BEGIN_SRC emacs-lisp
-   (when (memq window-system '(mac ns))
+   #+BEGIN_SRC emacs-lisp
+   (when (or (eq system-type 'darwin) (memq window-system '(mac ns)))
+     (setq mac-option-modifier nil
+           mac-command-modifier 'meta)
+
      (setq ns-pop-up-frames nil
-           mac-option-modifier nil
-           mac-command-modifier 'meta
            x-select-enable-clipboard t)
+
+     (require 'exec-path-from-shell)
      (exec-path-from-shell-initialize))
    #+END_SRC
 
@@ -366,11 +402,12 @@
    these.
 
    #+BEGIN_SRC emacs-lisp
-   (dolist (mode
-            '(tool-bar-mode                ; No toolbars, more room for text
-              scroll-bar-mode              ; No scroll bars either
-              blink-cursor-mode))          ; The blinking cursor gets old
-     (funcall mode 0))
+   (when (display-graphic-p)
+       (dolist (mode
+                '(tool-bar-mode                ; No toolbars, more room for text
+                  scroll-bar-mode              ; No scroll bars either
+                  blink-cursor-mode))          ; The blinking cursor gets old
+         (funcall mode 0)))
    #+END_SRC
 
    Let's apply the same technique for enabling modes that are disabled by
@@ -383,8 +420,8 @@
               delete-selection-mode        ; Replace selected text
               dirtrack-mode                ; directory tracking in *shell*
               drag-stuff-global-mode       ; Drag stuff around
-              global-company-mode          ; Auto-completion everywhere
               global-git-gutter-mode       ; Show changes latest commit
+              global-company-mode          ; Auto-completion everywhere
               global-prettify-symbols-mode ; Greek letters should look greek
               golden-ratio-mode            ; Automatic resizing of windows
               projectile-global-mode       ; Manage and navigate projects
@@ -463,8 +500,8 @@
    (dolist (p '((git-gutter:added    . "#0c0")
                 (git-gutter:deleted  . "#c00")
                 (git-gutter:modified . "#c0c")))
-     (set-face-foreground (car p) (cdr p))
-     (set-face-background (car p) (cdr p)))
+       (set-face-foreground (car p) (cdr p))
+       (set-face-background (car p) (cdr p)))
    #+END_SRC
 
    New in Emacs 24.4 is the =prettify-symbols-mode=! It's neat.
