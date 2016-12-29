@@ -9,13 +9,9 @@
 * Backlog
 
 ** more customization
-
-*** fix the problem with mac customization
-
+*** DONE fix the problem with mac customization
 *** add full screen
-
 ** add more documentations
-
 **** how to folk and track
 
 **** special folder and file
@@ -23,12 +19,8 @@
 **** add instructions for uninstall packages
 
 ** adopt the existing folked code and test again
-
 *** comment some unused parts
-
 *** fix warnings
-
-
 ** evil mode enhancements
 *** add more evil stuff: evil leader
 
