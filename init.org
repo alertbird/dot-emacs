@@ -315,7 +315,7 @@ package-menu-mark-delete=;
            mac-command-modifier 'meta)
 
      (setq ns-pop-up-frames nil
-           x-select-enable-clipboard t)
+           select-enable-clipboard t)
 
      (require 'exec-path-from-shell)
      (exec-path-from-shell-initialize))
