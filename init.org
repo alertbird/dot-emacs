@@ -16,7 +16,8 @@
 **** DONE add instructions for uninstall packages
 **** DONE special folder and file
 ** adopt the existing folked code and test again
-*** fix warnings: commented out mu4e; commented out some code for older versions.
+*** fix warnings: commented out mu4e; commented out some code for older
+versions; changed cl to be cl-lib.
 *** comment some unused parts
 ** evil mode enhancements
 *** add more evil stuff: evil leader
@@ -217,8 +218,12 @@
    Common Lisp, and comes in handy quite often, so we want to make sure it's
    loaded, along with =package=, which is obviously needed.
 
+   Changed to use =cl-lib= instead of =cl= to remove the warning, because =cl=
+   is not recommended to use after Emacs 24. This [[http://stackoverflow.com/questions/5019724/in-emacs-what-does-this-error-mean-warning-cl-package-required-at-runtime#5020049][StackOverflow post]] has more
+   explanations.
+
    #+BEGIN_SRC emacs-lisp
-   (require 'cl)
+   (require 'cl-lib)
    (require 'package)
    (package-initialize)
    #+END_SRC
@@ -280,7 +285,7 @@
              try                  ; Try out Emacs packages
              which-key))          ; Emacs package that displays available keybindings in popup 
           ;; Remove all packages already installed
-          (packages (remove-if 'package-installed-p packages)))
+          (packages (cl-remove-if 'package-installed-p packages)))
      (when packages
        (ignore-errors (package-refresh-contents)
                       (mapcar 'package-install packages))))
@@ -295,8 +300,6 @@
 package-menu-mark-delete=;
  
    3) execute the deletion with key '=x=' or command =M-x package-menu-execute=.
- 
-    
 
 ** Mac OS X
 
