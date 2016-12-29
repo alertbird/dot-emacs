@@ -12,7 +12,7 @@
 *** DONE fix the problem with mac customization
 *** add full screen
 ** add more documentations
-**** how to folk and track
+**** DONE how to fork and track
 
 **** special folder and file
 
@@ -30,6 +30,39 @@
 
 *** git-gutter-fringe does not work in terminal
     
+
+* Notes
+  
+   I forked Lars Tveito's [[https://github.com/larstvei/dot-emacs][dot-emacs]] repo to start my Emacs configurations. I
+   would like to make some notes on how to make use of these forked code.
+ 
+** Keeping this fork updated
+   
+   I follows this nice summary of [[https://robots.thoughtbot.com/keeping-a-github-fork-updated][Keeping a GitHub Fork Updated]].
+
+*** Track
+    
+    After I forked the repo, I run this for initialization.
+ 
+    #+BEGIN_SRC sh :tangle no
+    git clone https://github.com/larstvei/dot-emacs ~/.emacs.d
+   
+    cd ~/.emacs.d
+
+    git remote add upstream https://github.com/larstvei/dot-emacs
+    #+END_SRC
+
+*** Update
+
+    Each time I want to update from my local =master= branch:
+
+    #+BEGIN_SRC
+    git fetch upstream
+
+    git rebase upstream/master
+    #+END_SRC
+    
+    The goal of the rebase is to have a cleaner history.
 
 * About
 
