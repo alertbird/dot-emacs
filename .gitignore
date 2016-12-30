@@ -4,9 +4,10 @@ init.elc
 recentf
 helm-adaptive-history
 projectile-bookmarks.eld
+srecode-map.el
 
 # Untracked directories
-elpa/*
-autosaves/*
-auto-save-list/*
+/elpa
+/autosaves
+/auto-save-list
 
