@@ -18,13 +18,31 @@ C-h r		Emacs manual
 
 C-M-v		Scroll another window without moving cursor into the window (Shift - reverse order)
 
-Emacs Configuration Exampleswork
+
+Emacs Configurations to fork
 ============================
-Michael's Emacs Config
-https://github.com/K0HAX/configs/blob/master/emacs/config.org
+SpaceMacs
+https://github.com/syl20bnr/spacemacs
+
+purcell's emacs.d: An Emacs configuration bundle with batteries included
+https://github.com/purcell/emacs.d
+
+redguardtoo's emacs.d
+https://github.com/redguardtoo/emacs.d
+
+Sacha Chua's Emacs configuration
+http://pages.sachachua.com/.emacs.d/Sacha.html
 
 Another Emacs config using Org Mode in Github
 https://github.com/larstvei/dot-emacs
+
+Emacsformacosx Tips and Tricks
+https://emacsformacosx.com/tips
+
+More Emacs Configurations
+=========================
+Michael's Emacs Config
+https://github.com/K0HAX/configs/blob/master/emacs/config.org
 
 Aaron Bedra's Emacs 24 Configuration
 http://aaronbedra.com/emacs.d/
